@@ -1,8 +1,8 @@
 #include <iostream>
 using namespace std;
-// macros...
-#define updateHeight(root) root->height = 1 + max(getHeight(root->left), getHeight(root->right))
-#define deb(x) cout << #x << ' ' << x << '\n'
+
+#define updateHeight(root) root->height = 1+max(getHeight(root->left), getHeight(root->right))
+#define deb1(x) cout << #x << ' ' << x << '\n'
 #define read(x) int x; cin >> x
 
 class node {
@@ -23,6 +23,7 @@ public:
 class avl_tree {
 // member data
     node* root;
+    
 // member function
     int getHeight(node* curr) {
         if (!curr)
@@ -54,13 +55,11 @@ class avl_tree {
         return pivot;
     }
 public:
-    avl_tree() {
-        this->root = nullptr;
-    }
-    ~avl_tree() {
-        delete this->root;
-    }
-    // methods on AVL Tree...
+    avl_tree()
+        { this->root = nullptr; }
+    ~avl_tree()
+        { delete this->root; }
+
     node* insertAVL(int val, node* curr) {
         if(!curr)
             return new node(val);
@@ -89,6 +88,7 @@ public:
     void insertAVL(int val) {
         this->root = insertAVL(val, this->root);
     }
+
     node* deleteAVL(int val, node* curr) {
         if (!curr)
             return nullptr;
@@ -129,6 +129,7 @@ public:
     void deleteAVL(int val) {
         this->root = deleteAVL(val, this->root);
     }
+
     void printTree(node* curr) {
         if (!curr)
             return ;
@@ -148,27 +149,16 @@ public:
         cout << '\n';
     }
 };
-/* <----------------------------- main() ---------------------------------->
-test cases
-10
-0 1 1 3 4 5 10 23 40 50
-2
-0 1
+/*
+    7
+    4 2 6 1 3 5 7
+    4
+    4 1 3 6
 
-5
-984 286 587 377 286
-2
-286 587
-
-7
-4 2 6 1 3 5 7
-4
-4 1 3 6
-
-11
-54 44 86 43 46 78 88 50 61 83 89
-8
-46 86 88 61 89 78 54 83
+    11
+    54 44 86 43 46 78 88 50 61 83 89
+    8
+    46 86 88 61 89 78 54 83
 */
 int main() {
 
