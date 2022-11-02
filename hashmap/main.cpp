@@ -1,10 +1,17 @@
-#include <iostream>
+/*
+    note: 
+*/
+#include <bits/stdc++.h>
 using namespace std;
 
-#define prime 37
-#define ll long long
-#define read(x, y) y x; cin >> x
-#define deb(x) cout << #x << ' ' << x << '\n'
+#define fastio() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
+#define read(x) int x; cin >> x
+#define deb1(x) cout <<#x <<' ' <<x <<'\n'
+#define deb2(x, y) cout <<#x <<' ' <<x <<',' <<#y <<' ' <<y <<'\n'
+#define mod 1000000007
+
+typedef long long ll;
+typedef unsigned long long ull;
 
 template <typename T>
 class listNode {
@@ -25,9 +32,9 @@ public:
 template <typename T>
 class hashmap {
 
-private:
     listNode<T> **bucket;
     int key_count, totalSize;
+
     // hashing function...
     int bucketIdx(string key) {
         int hashcode = 0, pow = 1;
@@ -55,11 +62,11 @@ public:
         delete [] bucket;
     }
 
-// methods...
     void push(string key, T val = 0) {
 
         int idx = bucketIdx(key);
         listNode<T> *loc = bucket[idx];
+
         // search for the key if it's already present.
         while (loc) {
             if (loc->key == key)
@@ -101,6 +108,7 @@ public:
 
         int idx = bucketIdx(key);
         listNode<T> *loc = bucket[idx];
+
         // search for the key...
         while (loc) {
             if (loc->key == key)
@@ -113,6 +121,7 @@ public:
 
         int idx = bucketIdx(key);
         listNode<T> *loc = bucket[idx];
+
         // search for the key...
         while (loc) {
             if (loc->key == key)
@@ -121,7 +130,7 @@ public:
         }
         return 0;
     }
-    void show_map() { // shows whole map in key:val format.
+    void show_map() { // display whole map in key:val format.
         cout << "map status:\n";
         for (int i = 0; i < totalSize; ++i) {
             listNode<T> *loc = bucket[i];
@@ -134,6 +143,7 @@ public:
         for (int i = 0; i < totalSize; ++i)
         delete bucket[i];
         delete [] bucket;
+
         // reset data members.
         totalSize = 5;
         key_count = 0;
@@ -149,21 +159,28 @@ public:
     }
 };
 
+
 int main() {
+    fastio();
+    int T(1);
+
+    cin >> T;
 
     hashmap<int> m;
 
-    read(str, string);
-    for (char c: str) {
-        string x(1, c);
-        if (m.contains(x))
-            m.push(x, m.key_val(x) + 1);
-        else
-            m.push(x, 1);
-    }
-    m.show_map();
-    m.clean();
-    m.show_map();
+    while (T--) {
+        string input;
+        cin >> input;
 
+        for (char c: input) {
+            string x(1, c);
+            if (m.contains(x))
+                m.push(x, m.key_val(x)+1);
+            else
+                m.push(x, 1);
+        }
+        m.show_map();
+        m.clean();
+    }
     return 0;
 }
